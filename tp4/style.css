@@ -1,5 +1,7 @@
 /* styles for the TP4: Tic-Tac-Toe project */
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playwrite+NZ+Basic:wght@100..400&display=swap');
+
 :root {
     --gameBoardSize: 80vh;
     --gameBoardSpacer: 15px;
@@ -20,4 +22,11 @@
 .gameSpace {
     position: relative;
     background-color: white;
+    font-size: 10rem;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Playwrite NZ Basic", cursive;
 }
