@@ -1,32 +1,74 @@
-/* styles for the TP4: Tic-Tac-Toe project */
+/* TP4: Tic-Tac-Toe — Layout Only */
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playwrite+NZ+Basic:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+/* Root Variables Using CSS variables for easy adjustments */
 
 :root {
-    --gameBoardSize: 80vh;
-    --gameBoardSpacer: 15px;
+    /* Responsive board size (never too large) */
+    --gameBoardSize: min(92vmin, 520px);
+
+    /* Thickness of grid lines */
+    --gameBoardSpacer: clamp(10px, 1.6vmin, 18px);
 }
 
+/* Global Resetn */
+* {
+    box-sizing: border-box;
+}
+
+/* Page Layout Centers the game board on screen */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: rgb(0, 0, 0);
+    padding: 2rem;
+    font-family: "Oswald", sans-serif;
+}
+
+/* Game Board Container
+   Using CSS Grid to create 3x3 layout
+   The black background becomes the grid lines
+   */
 #gameBoard {
-    position: relative;
     width: var(--gameBoardSize);
     height: var(--gameBoardSize);
-    background-color: black;
-
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: var(--gameBoardSpacer);
+
+    /* Creates outer border line */
+    padding: var(--gameBoardSpacer);
+    background-color: #0804f6;
+    /* grid line color */
 }
 
+/* Individual Game Spaces (Cells) */
 .gameSpace {
-    position: relative;
-    background-color: white;
-    font-size: 10rem;
-    text-transform: uppercase;
-    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: #fffb00;
+    /* cell color */
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Playwrite NZ Basic", cursive;
+
+    text-transform: uppercase;
+    line-height: 1;
+
+    /* Responsive mark size */
+    font-size: clamp(3rem, 12vmin, 9rem);
+    color: rgb(250, 10, 150);
+    /*x and o color*/
+}
+
+@media (max-width: 480px){
+  body{
+    padding: 1rem;
+  }
 }
