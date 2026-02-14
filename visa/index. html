@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My_DOR</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Top Nav -->
+  <header class="topbar">
+    <div class="brand">My_DOR</div>
+
+    <div class="topbar-right">
+      <button class="icon-btn" aria-label="Help">
+        ?
+      </button>
+      <button class="icon-btn" aria-label="Logout">
+        ↩
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page">
+    <div class="welcome">Welcome, JuiHsuan Yang</div>
+
+    <section class="card">
+      <div class="card-inner">
+        <!-- Left column -->
+        <div class="left">
+          <p class="note green">** FINAL DOCUMENTS WILL BE DELAY**</p>
+          <p class="note green">YOUR VISA APPLICATION HAS BEEN APPROVED FOR THE 1 AND 2 STAGE.</p>
+
+          <p class="note red mt">REQUIRED: ADDITIONAL $11400 HAS TO BE PAID FOR VISA APPLICATION.</p>
+          <p class="note red">**TOTAL $20,000 IS THE AMOUNT OF ALL HAS TO BE PAID** FINES DOES NOT INCLUDE IN $20,000</p>
+
+          <div class="info mt-lg">
+            <p><span class="label">NAME:</span> JUIHSUAN YANG</p>
+            <p><span class="label">DOB:</span> 10/24/2002</p>
+            <p><span class="label">SCHOOL:</span> WASHINGTON STATE UNIVERSITY</p>
+            <p><span class="label">YEAR:</span> SENIOR</p>
+            <p><span class="label">EXPECTED GRADUATION:</span> DEC/2026</p>
+          </div>
+
+          <div class="balance mt-xl">
+            <span class="balance-label">BALANCE:</span>
+            <span class="balance-amt">$5700 USD</span>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="right">
+          <button class="btn primary">GET STARTED</button>
+          <button class="btn outline">MANAGE</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

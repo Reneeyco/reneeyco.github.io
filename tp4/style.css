@@ -67,8 +67,8 @@ body {
     /*x and o color*/
 }
 
-@media (max-width: 480px){
-  body{
-    padding: 1rem;
-  }
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
 }
