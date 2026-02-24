@@ -1,5 +1,6 @@
 /* ---------------tp5 styling */
 
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Playwrite+NZ+Basic:wght@100..400&display=swap');
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,15 +14,16 @@
 
 /* Page styling */
 body {
-    background-color: #f4acc9;
-    font-family: sans-serif;
-    padding: 2rem;
+  background-color: #fbc5db;
+  font-family: 'Mulish', sans-serif;
+  padding: 2rem;
 }
 
 /* Title / text */
 .title {
-    margin-bottom: 0.5rem;
-    font-size: 2.5rem;
+  font-family: 'Playwrite NZ Basic', cursive;
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
 }
 
 .subtitle {
