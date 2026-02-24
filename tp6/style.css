@@ -1,0 +1,509 @@
+/* =========================
+   TP6 Weather Layout (Yunlin)
+   Mobile-first, responsive
+========================= */
+
+:root {
+  --bg1: #08131b;
+  --bg2: #0b1e24;
+
+  --card: rgba(255, 255, 255, 0.08);
+  --card2: rgba(255, 255, 255, 0.12);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.68);
+  --stroke: rgba(255, 255, 255, 0.14);
+
+  --radius: 18px;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+  --max: 900px;
+  --gap: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+
+  /* tropical-ish soft background */
+  background: radial-gradient(1200px 600px at 18% 12%, rgba(58, 220, 175, 0.18), transparent 60%),
+              radial-gradient(900px 500px at 92% 18%, rgba(255, 209, 102, 0.18), transparent 55%),
+              linear-gradient(180deg, var(--bg1), var(--bg2));
+}
+
+.app {
+  width: min(var(--max), 94vw);
+  margin: 18px auto 30px;
+  padding: 16px;
+}
+
+/* -------------------------
+   Header
+------------------------- */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap);
+  margin-bottom: 14px;
+}
+
+.label {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.location {
+  margin: 6px 0 0;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.updated {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.unit {
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+
+/* -------------------------
+   Current Layout
+------------------------- */
+.current {
+  display: grid;
+  gap: var(--gap);
+}
+
+/* big temp card */
+.tempBlock {
+  background: linear-gradient(180deg, var(--card2), var(--card));
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.temp {
+  margin: 6px 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.tempNum {
+  font-size: 4.2rem;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.tempUnit {
+  font-size: 1.25rem;
+  color: var(--muted);
+  font-weight: 750;
+}
+
+/* Option 2: small F temp under big C */
+.altTemp {
+  margin: 4px 0 0;
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+
+/* condition row */
+.condition {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.condText {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--text);
+  font-weight: 650;
+}
+
+/* -------------------------
+   CSS-only icon (overcast)
+------------------------- */
+.icon {
+  width: 56px;
+  height: 42px;
+  position: relative;
+}
+
+.icon .cloud,
+.icon .cloud2 {
+  position: absolute;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  bottom: 2px;
+}
+
+.icon .cloud {
+  width: 52px;
+  left: 2px;
+  opacity: 0.95;
+}
+.icon .cloud::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 50%;
+  left: 10px;
+  top: -12px;
+}
+
+.icon .cloud2 {
+  width: 38px;
+  left: 10px;
+  bottom: 10px;
+  opacity: 0.75;
+}
+
+/* -------------------------
+   Stats cards
+------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.statCard {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.06));
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.statTitle {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+}
+
+.statValue .big {
+  font-size: 1.8rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.statValue .small {
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* wind visualization */
+.windViz {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.windViz .ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.windViz .arrow {
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 18px solid rgba(255, 255, 255, 0.9);
+  transform: rotate(var(--dir));
+  transform-origin: 50% 70%;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+}
+
+.windViz .dirLabel {
+  position: absolute;
+  bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* humidity visualization */
+.humidityViz {
+  margin-top: 6px;
+}
+
+.humidityViz .bar {
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+}
+.humidityViz .bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--h);
+  background: rgba(58, 220, 175, 0.45);
+}
+
+.humidityViz .ticks {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* -------------------------
+   Forecast Section
+------------------------- */
+.forecast {
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.sectionTitle {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+.dayCard {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.dayHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.dayName {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 850;
+}
+
+.dayDate {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.dayMid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dayCond {
+  margin: 0;
+  font-weight: 650;
+}
+
+.ranges {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.range {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.rangeAlt {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.hi {
+  font-weight: 850;
+}
+
+.lo {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+/* mini icons */
+.miniIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+/* sunny */
+.miniIcon.sunny::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(255, 209, 102, 0.95);
+}
+
+/* cloudy */
+.miniIcon.cloudy::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* partly cloudy */
+.miniIcon.partly::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(255, 209, 102, 0.85);
+}
+.miniIcon.partly::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  right: 3px;
+  bottom: 7px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+/* tiny thermometer range bar */
+.thermo {
+  --min: 10;
+  --max: 35;
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.thermo .track {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.thermo .fill {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: calc(((var(--low) - var(--min)) / (var(--max) - var(--min))) * 100%);
+  width: calc(((var(--high) - var(--low)) / (var(--max) - var(--min))) * 100%);
+  border-radius: 999px;
+  background: rgba(255, 209, 102, 0.55);
+}
+
+.dayWind {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* -------------------------
+   Footer
+------------------------- */
+.footer {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* -------------------------
+   Responsive layout
+------------------------- */
+@media (min-width: 720px) {
+  .app {
+    padding: 22px;
+  }
+
+  .current {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .days {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .location {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 980px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
