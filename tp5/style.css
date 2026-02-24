@@ -1,232 +1,156 @@
-/* styles for Concentration board */
-
-body {
-    background-color: #ffe6f0; /* light pink */
-}
+/* ---------------tp5 styling */
 
 * {
     box-sizing: border-box;
-    /* makes it easier to work with dimensions */
+    margin: 0;
+    padding: 0;
 }
 
+/* Desktop default (we’ll override on mobile) */
 :root {
- --cardSize: min(30vw, 200px);
+    --cardSize: 180px;
 }
 
-/******************************** general card styling*/
+/* Page styling */
+body {
+    background-color: #f8c8dc;
+    font-family: sans-serif;
+    padding: 2rem;
+}
+
+/* Title / text */
+.title {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+/* ----------------------------------  CARD STRUCTURE */
 
 .card {
     position: relative;
     width: var(--cardSize);
     height: var(--cardSize);
-    perspective: 500px;
-    /* special CSS property relevant to 3D flips */
-    margin-bottom: 1rem;
+    perspective: 800px;
 }
 
 .cardContent {
     position: absolute;
-    /* positioning within the parent card object */
     width: 100%;
     height: 100%;
-    transition: transform 0.5s;
+    transition: transform 0.6s ease;
     transform-style: preserve-3d;
-    /* special CSS property relevant to 3D flips */
 }
 
 .card:hover .cardContent {
     transform: rotateY(180deg);
-    /* simulate a 3D flip */
 }
 
 .cardTop,
 .cardBottom {
     position: absolute;
-    /* positioning within the parent cardContent object */
-    text-align: center;
-    height: 100%;
     width: 100%;
-    border: 2px solid black;
-    font-size: 42px;
+    height: 100%;
+    border-radius: 16px;
+    border: 2px solid white;
     backface-visibility: hidden;
-    /* special CSS property relevant to 3D flips */
 }
 
+/* Card front (hidden side) */
 .cardTop {
     background-color: black;
 }
 
+/* Card back (dog images) */
 .cardBottom {
-    background-color: #eee;
-    color: black;
     transform: rotateY(180deg);
-    /* pre-flip so it appears on parent's flip */
+    background-size: contain;
+    /* fits inside the box */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    /* fills empty space */
 }
 
-
-/******************************** specific card styling*/
+/* -------------------------------------------DOG IMAGES (8 pairs) */
 
 .pair1 .cardBottom {
-    --s: 120px;
-    /* control the size*/
-    --c1: #e7525b;
-    --c2: #78dbf0;
-
-    --_g: 80%, var(--c1) 25.4%, #0000 26%;
-    background:
-        radial-gradient(at 80% var(--_g)),
-        radial-gradient(at 20% var(--_g)),
-        conic-gradient(from -45deg at 50% 41%, var(--c1) 90deg, var(--c2) 0) calc(var(--s)/2) 0;
-    background-size: var(--s) var(--s);
+    background-image: url("images/1.jpg");
 }
 
 .pair2 .cardBottom {
-    --s: 90px;
-    /* control the size*/
-    --c1: #fff220;
-    --c2: #e181c2;
-
-    --d: calc(var(--s)/10);
-    /* control the gap between stars */
-
-    --_g: var(--c1) 36deg, #0000 0;
-    background:
-        conic-gradient(from 162deg at calc(var(--s) * .5) calc(var(--s) * .68), var(--_g)),
-        conic-gradient(from 18deg at calc(var(--s) * .19) calc(var(--s) * .59), var(--_g)),
-        conic-gradient(from 306deg at calc(var(--s) * .81) calc(var(--s) * .59), var(--_g)),
-        var(--c2);
-    background-position: 0 calc(var(--s) * 0.35);
-    background-size: calc(var(--s) + var(--d)) calc(var(--s) + var(--d));
+    background-image: url("images/2.jpg");
 }
 
 .pair3 .cardBottom {
-    --s: 76px;
-    /* control the size*/
-    --c1: #f6d86b;
-    --c2: #f10c49;
-
-    background:
-        conic-gradient(var(--c2) atan(2), var(--c1) 0 calc(180deg - atan(2)),
-            var(--c2) 0 180deg, var(--c1) 0 calc(180deg + atan(2)),
-            var(--c2) 0 calc(360deg - atan(2)), var(--c1) 0);
-    background-size: calc(2*var(--s)) var(--s);
+    background-image: url("images/3.jpg");
 }
 
 .pair4 .cardBottom {
-    --s: 100px;
-    /* control the size*/
-    --c1: #f8b195;
-    --c2: #355c7d;
-
-    --_g:
-        var(--c2) 6% 14%, var(--c1) 16% 24%, var(--c2) 26% 34%, var(--c1) 36% 44%,
-        var(--c2) 46% 54%, var(--c1) 56% 64%, var(--c2) 66% 74%, var(--c1) 76% 84%, var(--c2) 86% 94%;
-    background:
-        radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
-        radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%) var(--c1);
-    background-size: var(--s) var(--s);
+    background-image: url("images/4.jpg");
 }
 
 .pair5 .cardBottom {
-    --s: 56px;
-    /* control the size*/
-    --c1: #3fb8af;
-    --c2: #ff9e9d;
-
-    --_c1: var(--c1) 99%, #0000 101%;
-    --_c2: var(--c2) 99%, #0000 101%;
-
-    --r: calc(var(--s)*.866);
-    --g0: radial-gradient(var(--s), var(--_c1));
-    --g1: radial-gradient(var(--s), var(--_c2));
-    --f: radial-gradient(var(--s) at calc(100% + var(--r)) 50%, var(--_c1));
-    --p: radial-gradient(var(--s) at 100% 50%, var(--_c2));
-    background:
-        var(--f) 0 calc(-5*var(--s)/2),
-        var(--f) calc(-2*var(--r)) calc(var(--s)/2),
-        var(--p) 0 calc(-2*var(--s)),
-        var(--g0) var(--r) calc(-5*var(--s)/2),
-        var(--g1) var(--r) calc(5*var(--s)/2),
-        radial-gradient(var(--s) at 100% 100%, var(--_c1)) 0 calc(-1*var(--s)),
-        radial-gradient(var(--s) at 0% 50%, var(--_c1)) 0 calc(-4*var(--s)),
-        var(--g1) calc(-1*var(--r)) calc(-7*var(--s)/2),
-        var(--g0) calc(-1*var(--r)) calc(-5*var(--s)/2),
-        var(--p) calc(-2*var(--r)) var(--s),
-        var(--g0) calc(-1*var(--r)) calc(var(--s)/ 2),
-        var(--g1) calc(-1*var(--r)) calc(var(--s)/-2),
-        var(--g0) 0 calc(-1*var(--s)),
-        var(--g1) var(--r) calc(var(--s)/-2),
-        var(--g0) var(--r) calc(var(--s)/ 2) var(--c2);
-    background-size: calc(4*var(--r)) calc(6*var(--s));
+    background-image: url("images/5.jpg");
 }
 
 .pair6 .cardBottom {
-    --s: 50px;
-    /* control the size*/
-    --c1: #5e412f;
-    --c2: #fcebb6;
-
-    background:
-        radial-gradient(25% 50%, var(--c1) 98%, #0000) var(--s) 0/calc(2*var(--s)) var(--s),
-        radial-gradient(25% 50%, var(--c2) 98%, #0000) 0 0/calc(2*var(--s)) var(--s),
-        repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 0 0/calc(2*var(--s)) calc(2*var(--s));
+    background-image: url("images/6.jpg");
 }
 
 .pair7 .cardBottom {
-    --s: 50px;
-    /* control the size*/
-    --c1: #292522;
-    --c2: #efd9b4;
-
-    --c: #0000 75%, var(--c1) 0;
-    --g1: conic-gradient(at 75% 25%, var(--c));
-    --g2: conic-gradient(at 25% 75%, var(--c));
-    background:
-        var(--g1), var(--g1) var(--s) var(--s),
-        var(--g2), var(--g2) var(--s) var(--s) var(--c2);
-    background-size: calc(2*var(--s)) calc(2*var(--s));
+    background-image: url("images/7.jpg");
 }
 
 .pair8 .cardBottom {
-    --s: 160px;
-    /* control the size*/
-    --c1: #e08e79;
-    --c2: #f1d4af;
-    --c3: #955e3e;
-
-    background:
-        conic-gradient(from 15deg at 86.6%,
-            var(--c3) 25%, var(--c2) 0 150deg, #0000 0),
-        conic-gradient(from -75deg at 50% 13.39%,
-            var(--c1) 60deg, var(--c3) 0 150deg,
-            var(--c2) 0 210deg, #0000 0),
-        conic-gradient(from 15deg at 36.6% 63.4%,
-            var(--c1) 60deg, var(--c3) 0 150deg,
-            var(--c1) 0 210deg, var(--c2) 0 75%, var(--c3) 0);
-    background-size: var(--s) var(--s);
+    background-image: url("images/8.jpg");
 }
 
-
-
-/******************************** gameboard formattin */
+/* ------------------------------- GAME BOARD LAYOUT */
 
 #gameBoard {
-    position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 1rem;
-    width: 100%;          /* no horizontal scroll */
-    max-width: 900px;     /* keeps board from spreading too wide */
-    margin: 0 auto;       /* centers board */
-    justify-content: center; /* centers the grid inside */
+    gap: 1.5rem;
+    justify-content: center;
+    justify-items: center;
 }
 
-@media screen and (orientation: landscape) {
-
-    #gameBoard {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+/* Portrait (phones) */
+@media (max-width: 600px) {
+    :root {
+        --cardSize: 130px;
+        /* bigger cards on small screens */
     }
 
+    body {
+        padding: 1.25rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        /* smaller text on mobile */
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #gameBoard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        /* slightly tighter spacing */
+    }
+}
+
+/* Landscape (laptops / wide screens) */
+@media (min-width: 601px) {
+    #gameBoard {
+        grid-template-columns: repeat(4, auto);
+    }
 }
