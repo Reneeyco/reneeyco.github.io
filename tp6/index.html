@@ -1,173 +1,184 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TP6 Weather Layout - Yunlin</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <!--
-      TP6: Layout only (no API / no interactivity).
-      City chosen: Yunlin County, Taiwan (hometown).
-      Current values + forecast are used as realistic sample data.
-    -->
-    <main class="app" aria-label="Weather app layout">
-      <header class="top">
-        <div class="place">
-          <p class="label">Location</p>
-          <h1 class="location">Yunlin County, Taiwan</h1>
-          <p class="updated">Updated: Feb 24, 2026</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Project 06: Layout for Weather App</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="scripts.js" defer></script>
+</head>
+
+<body>
+  <main class="app">
+
+    <!----------------LOCATION HEADER -->
+
+    <header class="topBar">
+      <div>
+        <p class="label">Location</p>
+        <h1 class="location">
+          Mailiao Township, Yunlin County, Taiwan
+        </h1>
+        <p class="updated">Updated: Feb 24, 2026</p>
+      </div>
+
+      <div class="unitBadge">°C / °F</div>
+    </header>
+
+    <!----------------------CURRENT CONDITIONS -->
+    <section class="card" id="currentInfo">
+
+      <div class="currentLeft">
+        <p class="label">Now</p>
+
+        <!-- Option 2 Temperature -->
+        <div id="currentTemp">
+          <div class="tempBig">
+            <span class="tempNum">27</span>
+            <span class="tempUnit">°C</span>
+          </div>
+          <div class="tempSmall">80°F</div>
         </div>
 
-        <!-- Visual-only button (not interactive) -->
-        <button class="unit" type="button" aria-label="Units (visual only)">
-          °C / °F
-        </button>
-      </header>
+        <div id="currentStatus">
+          <div class="statusIcon">☁️</div>
+          <div>
+            <p class="statusLabel">Condition</p>
+            <p class="statusValue">Overcast</p>
+          </div>
+        </div>
+      </div>
 
-      <section class="current" aria-label="Current conditions">
-        <div class="tempBlock">
-          <p class="label">Now</p>
+      <div class="currentRight">
 
-          <!-- Option 2: Big Celsius + small Fahrenheit -->
-          <p class="temp" aria-label="Current temperature">
-            <span class="tempNum">27</span><span class="tempUnit">°C</span>
+        <!-- HUMIDITY -->
+        <div class="miniCard" id="currentHumidity">
+          <p class="miniTitle">Humidity</p>
+          <p class="miniValue">
+            <span class="bigNum">75</span>%
           </p>
-          <p class="altTemp">80°F</p>
-
-          <div class="condition" aria-label="Current condition">
-            <!-- CSS icon: cloudy/overcast -->
-            <div class="icon cloudy" aria-hidden="true">
-              <span class="cloud"></span>
-              <span class="cloud2"></span>
-            </div>
-            <p class="condText">Overcast</p>
+          <div class="barWrap">
+            <div class="bar" style="width: 75%"></div>
           </div>
         </div>
 
-        <div class="stats" aria-label="Wind and humidity">
-          <article class="statCard">
-            <h2 class="statTitle">Wind</h2>
-            <!-- kph is fine for Taiwan -->
-            <p class="statValue">
-              <span class="big">14</span> kph
-              <span class="small">NE</span>
-            </p>
+        <!-- WIND -->
+        <div class="miniCard" id="currentWind">
+          <p class="miniTitle">Wind</p>
+          <p class="miniValue">
+            <span class="bigNum">22</span> kph
+            <span class="pill">NE</span>
+          </p>
 
-            <!-- Wind arrow (rotates with CSS variable) -->
-            <div class="windViz" style="--dir: 45deg" aria-hidden="true">
-              <div class="arrow"></div>
-              <div class="ring"></div>
-              <div class="dirLabel">NE</div>
-            </div>
-          </article>
-
-          <article class="statCard">
-            <h2 class="statTitle">Humidity</h2>
-            <p class="statValue"><span class="big">78</span>%</p>
-
-            <!-- Humidity bar (width controlled with CSS var) -->
-            <div class="humidityViz" style="--h: 78%" aria-hidden="true">
-              <div class="bar"></div>
-              <div class="ticks">
-                <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
-              </div>
-            </div>
-          </article>
+          <div class="windViz" style="--dir: 45deg">
+            <div class="ring"></div>
+            <div class="arrow"></div>
+            <div class="dir">NE</div>
+          </div>
         </div>
-      </section>
 
-      <section class="forecast" aria-label="3-day forecast">
+      </div>
+    </section>
+
+    <!--------------NEXT 3 DAYS FORECAST -->
+    <section class="card" id="futureInfo">
+
+      <div class="sectionHead">
         <h2 class="sectionTitle">Next 3 Days</h2>
+        <p class="sectionSub">Temp Range • Condition • Wind</p>
+      </div>
 
-        <div class="days" role="list">
-          <!-- Day 1 -->
-          <article class="dayCard" role="listitem">
-            <div class="dayHead">
-              <p class="dayName">Tue</p>
-              <p class="dayDate">Feb 24</p>
-            </div>
+      <div class="futureGrid">
 
-            <div class="dayMid">
-              <div class="miniIcon partly" aria-hidden="true"></div>
-              <p class="dayCond">Clouds → Some Sun</p>
-            </div>
+        <!-- DAY 1 -->
+        <div class="futureDay">
+          <div class="dayTop">
+            <p class="dayName">Wed</p>
+            <p class="dayDate">Feb 25</p>
+          </div>
 
-            <div class="ranges">
-              <p class="range"><span class="hi">30°C</span> / <span class="lo">19°C</span></p>
-              <p class="rangeAlt"><span class="hi">85°F</span> / <span class="lo">66°F</span></p>
+          <div class="futureStatus">
+            <span class="icon">🌤️</span>
+            <span>Partly Cloudy</span>
+          </div>
 
-              <!-- tiny thermometer bar (visual temperature range) -->
-              <div class="thermo" style="--low: 19; --high: 30" aria-hidden="true">
-                <div class="track"></div>
-                <div class="fill"></div>
-              </div>
-            </div>
+          <div class="futureTemp">
+            <p>
+              <span class="hi">29°C</span> /
+              <span class="lo">18°C</span>
+            </p>
+            <p class="alt">
+              <span class="hi">84°F</span> /
+              <span class="lo">64°F</span>
+            </p>
+          </div>
 
-            <p class="dayWind">Wind: 18 kph</p>
-          </article>
-
-          <!-- Day 2 -->
-          <article class="dayCard" role="listitem">
-            <div class="dayHead">
-              <p class="dayName">Wed</p>
-              <p class="dayDate">Feb 25</p>
-            </div>
-
-            <div class="dayMid">
-              <div class="miniIcon sunny" aria-hidden="true"></div>
-              <p class="dayCond">Mostly Sunny</p>
-            </div>
-
-            <div class="ranges">
-              <p class="range"><span class="hi">30°C</span> / <span class="lo">17°C</span></p>
-              <p class="rangeAlt"><span class="hi">87°F</span> / <span class="lo">62°F</span></p>
-
-              <div class="thermo" style="--low: 17; --high: 30" aria-hidden="true">
-                <div class="track"></div>
-                <div class="fill"></div>
-              </div>
-            </div>
-
-            <p class="dayWind">Wind: 15 kph</p>
-          </article>
-
-          <!-- Day 3 -->
-          <article class="dayCard" role="listitem">
-            <div class="dayHead">
-              <p class="dayName">Thu</p>
-              <p class="dayDate">Feb 26</p>
-            </div>
-
-            <div class="dayMid">
-              <div class="miniIcon cloudy" aria-hidden="true"></div>
-              <p class="dayCond">Mostly Cloudy</p>
-            </div>
-
-            <div class="ranges">
-              <p class="range"><span class="hi">30°C</span> / <span class="lo">19°C</span></p>
-              <p class="rangeAlt"><span class="hi">86°F</span> / <span class="lo">66°F</span></p>
-
-              <div class="thermo" style="--low: 19; --high: 30" aria-hidden="true">
-                <div class="track"></div>
-                <div class="fill"></div>
-              </div>
-            </div>
-
-            <p class="dayWind">Wind: 12 kph</p>
-          </article>
+          <div class="futureWind">Wind: 20 kph</div>
         </div>
 
-        <p class="note">
-          * Layout demo only — values are realistic sample data for Yunlin County, Taiwan.
-        </p>
-      </section>
+        <!-- DAY 2 -->
+        <div class="futureDay">
+          <div class="dayTop">
+            <p class="dayName">Thu</p>
+            <p class="dayDate">Feb 26</p>
+          </div>
 
-      <footer class="footer">
-        <p>TP6 • Weather App Layout • HTML + CSS</p>
-      </footer>
-    </main>
-  </body>
+          <div class="futureStatus">
+            <span class="icon">☁️</span>
+            <span>Cloudy</span>
+          </div>
+
+          <div class="futureTemp">
+            <p>
+              <span class="hi">28°C</span> /
+              <span class="lo">20°C</span>
+            </p>
+            <p class="alt">
+              <span class="hi">82°F</span> /
+              <span class="lo">68°F</span>
+            </p>
+          </div>
+
+          <div class="futureWind">Wind: 18 kph</div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="futureDay">
+          <div class="dayTop">
+            <p class="dayName">Fri</p>
+            <p class="dayDate">Feb 27</p>
+          </div>
+
+          <div class="futureStatus">
+            <span class="icon">🌥️</span>
+            <span>Mostly Cloudy</span>
+          </div>
+
+          <div class="futureTemp">
+            <p>
+              <span class="hi">30°C</span> /
+              <span class="lo">21°C</span>
+            </p>
+            <p class="alt">
+              <span class="hi">86°F</span> /
+              <span class="lo">70°F</span>
+            </p>
+          </div>
+
+          <div class="futureWind">Wind: 22 kph</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>TP6 • Layout for Weather App</p>
+    </footer>
+
+  </main>
+</body>
+
 </html>

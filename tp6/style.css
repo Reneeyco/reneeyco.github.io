@@ -1,509 +1,336 @@
-/* =========================
-   TP6 Weather Layout (Yunlin)
-   Mobile-first, responsive
-========================= */
+/* TP6 Weather App css styling */
 
-:root {
-  --bg1: #08131b;
-  --bg2: #0b1e24;
-
-  --card: rgba(255, 255, 255, 0.08);
-  --card2: rgba(255, 255, 255, 0.12);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.68);
-  --stroke: rgba(255, 255, 255, 0.14);
-
-  --radius: 18px;
-  --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-
-  --max: 900px;
-  --gap: 14px;
-}
+/* STEP 1: Base Reset + Theme Variables */
 
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --bg: rgb(61, 57, 57);
+  --card: #111111;
+  --cardSoft: #434141;
+
+  --pink: #ff4da6;
+  --pinkSoft: rgba(255, 77, 166, 0.25);
+
+  --text: #ffffff;
+  --muted: #fdf7f7;
+
+  --radius: 20px;
+  --shadow: 0 18px 45px rgba(255, 77, 166, 0.18);
+  --gap: 18px;
+  --max: 1000px;
+}
+
+/* STEP 2: Body + Main Layout Container */
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
-
-  /* tropical-ish soft background */
-  background: radial-gradient(1200px 600px at 18% 12%, rgba(58, 220, 175, 0.18), transparent 60%),
-              radial-gradient(900px 500px at 92% 18%, rgba(255, 209, 102, 0.18), transparent 55%),
-              linear-gradient(180deg, var(--bg1), var(--bg2));
 }
 
 .app {
   width: min(var(--max), 94vw);
-  margin: 18px auto 30px;
-  padding: 16px;
+  margin: 30px auto;
+  padding: 20px;
 }
 
-/* -------------------------
-   Header
-------------------------- */
-.top {
+/* STEP 3: Header Layout (Flexbox) */
+
+.topBar {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--gap);
-  margin-bottom: 14px;
+  margin-bottom: 30px;
 }
 
 .label {
   margin: 0;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--muted);
 }
 
 .location {
-  margin: 6px 0 0;
-  font-size: 1.6rem;
-  line-height: 1.1;
+  margin: 8px 0 0;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--pink);
 }
 
 .updated {
   margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.unit {
-  border: 1px solid var(--stroke);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 700;
-  box-shadow: var(--shadow);
-}
-
-/* -------------------------
-   Current Layout
-------------------------- */
-.current {
-  display: grid;
-  gap: var(--gap);
-}
-
-/* big temp card */
-.tempBlock {
-  background: linear-gradient(180deg, var(--card2), var(--card));
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 18px;
-}
-
-.temp {
-  margin: 6px 0 0;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.tempNum {
-  font-size: 4.2rem;
-  font-weight: 850;
-  letter-spacing: -0.04em;
-}
-
-.tempUnit {
-  font-size: 1.25rem;
-  color: var(--muted);
-  font-weight: 750;
-}
-
-/* Option 2: small F temp under big C */
-.altTemp {
-  margin: 4px 0 0;
-  font-size: 0.98rem;
-  color: var(--muted);
-}
-
-/* condition row */
-.condition {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.condText {
-  margin: 0;
-  font-size: 1.15rem;
-  color: var(--text);
-  font-weight: 650;
-}
-
-/* -------------------------
-   CSS-only icon (overcast)
-------------------------- */
-.icon {
-  width: 56px;
-  height: 42px;
-  position: relative;
-}
-
-.icon .cloud,
-.icon .cloud2 {
-  position: absolute;
-  height: 20px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  bottom: 2px;
-}
-
-.icon .cloud {
-  width: 52px;
-  left: 2px;
-  opacity: 0.95;
-}
-.icon .cloud::before {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.88);
-  border-radius: 50%;
-  left: 10px;
-  top: -12px;
-}
-
-.icon .cloud2 {
-  width: 38px;
-  left: 10px;
-  bottom: 10px;
-  opacity: 0.75;
-}
-
-/* -------------------------
-   Stats cards
-------------------------- */
-.stats {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
-}
-
-.statCard {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.06));
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-}
-
-.statTitle {
-  margin: 0 0 8px;
-  font-size: 0.95rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.statValue {
-  margin: 0 0 10px;
-  font-size: 1.1rem;
-}
-
-.statValue .big {
-  font-size: 1.8rem;
-  font-weight: 850;
-  letter-spacing: -0.02em;
-}
-
-.statValue .small {
-  margin-left: 8px;
-  padding: 2px 8px;
-  border: 1px solid var(--stroke);
-  border-radius: 999px;
   font-size: 0.9rem;
   color: var(--muted);
 }
 
-/* wind visualization */
+.unitBadge {
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.unitBadge:hover {
+  background: var(--pinkSoft);
+}
+
+/* STEP 4: Card System (Reusable Layout Blocks) */
+
+.card {
+  background: linear-gradient(145deg, #0f0f0f, #181818);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: var(--gap);
+  box-shadow: var(--shadow);
+}
+
+/* STEP 5: Current Section Layout (Grid) */
+
+#currentInfo {
+  display: grid;
+  gap: var(--gap);
+}
+
+.tempBig {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tempNum {
+  font-size: 4.2rem;
+  font-weight: 900;
+  color: var(--pink);
+  letter-spacing: -2px;
+}
+
+.tempUnit {
+  font-size: 1.2rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.tempSmall {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* Condition */
+
+#currentStatus {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.statusIcon {
+  font-size: 1.8rem;
+  background: var(--cardSoft);
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.statusLabel {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.statusValue {
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+
+/* STEP 6: Mini Cards (Humidity + Wind) */
+
+.currentRight {
+  display: grid;
+  gap: var(--gap);
+}
+
+.miniCard {
+  background: var(--cardSoft);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.miniTitle {
+  margin: 0 0 10px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.bigNum {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.pill {
+  background: var(--pinkSoft);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-left: 8px;
+}
+
+/* Humidity Bar */
+
+.barWrap {
+  height: 10px;
+  background: #2a2a2a;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.bar {
+  height: 100%;
+  background: var(--pink);
+  box-shadow: 0 0 10px rgba(255, 77, 166, 0.6);
+}
+
+/* Wind Circle */
+
 .windViz {
+  width: 95px;
+  height: 95px;
+  margin-top: 14px;
+  position: relative;
   display: grid;
   place-items: center;
-  width: 92px;
-  height: 92px;
-  position: relative;
-  margin-top: 6px;
 }
 
 .windViz .ring {
   position: absolute;
   inset: 0;
+  border: 1px solid var(--pink);
   border-radius: 50%;
-  border: 1px solid var(--stroke);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .windViz .arrow {
   width: 0;
   height: 0;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-bottom: 18px solid rgba(255, 255, 255, 0.9);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid var(--pink);
   transform: rotate(var(--dir));
   transform-origin: 50% 70%;
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
 }
 
-.windViz .dirLabel {
+.windViz .dir {
   position: absolute;
   bottom: 8px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--muted);
 }
 
-/* humidity visualization */
-.humidityViz {
-  margin-top: 6px;
-}
+/* STEP 7: Forecast Section Layout (Grid) */
 
-.humidityViz .bar {
-  height: 12px;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  background: rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  position: relative;
-}
-.humidityViz .bar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: var(--h);
-  background: rgba(58, 220, 175, 0.45);
-}
-
-.humidityViz .ticks {
-  margin-top: 6px;
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-/* -------------------------
-   Forecast Section
-------------------------- */
-.forecast {
-  margin-top: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
-  padding: 14px;
+.sectionHead {
+  margin-bottom: 18px;
 }
 
 .sectionTitle {
-  margin: 0 0 10px;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--pink);
 }
 
-.days {
+.sectionSub {
+  margin: 6px 0 0;
+  color: var(--pink);
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.futureGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--gap);
 }
 
-.dayCard {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
-  border: 1px solid var(--stroke);
+.futureDay {
+  background: var(--cardSoft);
   border-radius: 16px;
-  padding: 12px;
+  padding: 16px;
+  transition: transform 0.2s ease;
 }
 
-.dayHead {
+.futureDay:hover {
+  transform: translateY(-4px);
+}
+
+.dayTop {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
 }
 
 .dayName {
   margin: 0;
-  font-size: 1.05rem;
-  font-weight: 850;
+  font-weight: 800;
+  color: var(--pink);
 }
 
 .dayDate {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
 }
 
-.dayMid {
+.futureStatus {
+  margin-top: 12px;
   display: flex;
-  align-items: center;
   gap: 10px;
-  margin-top: 10px;
+  font-weight: 600;
 }
 
-.dayCond {
-  margin: 0;
-  font-weight: 650;
+.futureTemp {
+  margin-top: 12px;
 }
 
-.ranges {
-  margin-top: 10px;
-  display: grid;
-  gap: 6px;
-}
-
-.range {
-  margin: 0;
-  font-size: 1.05rem;
-}
-
-.rangeAlt {
-  margin: 0;
-  font-size: 0.9rem;
+.futureTemp .alt {
   color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
 }
 
 .hi {
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .lo {
   color: var(--muted);
-  font-weight: 650;
 }
 
-/* mini icons */
-.miniIcon {
-  width: 28px;
-  height: 28px;
-  border-radius: 10px;
-  border: 1px solid var(--stroke);
-  background: rgba(255, 255, 255, 0.06);
-  position: relative;
-}
-
-/* sunny */
-.miniIcon.sunny::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  background: rgba(255, 209, 102, 0.95);
-}
-
-/* cloudy */
-.miniIcon.cloudy::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  bottom: 8px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.85);
-}
-
-/* partly cloudy */
-.miniIcon.partly::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  background: rgba(255, 209, 102, 0.85);
-}
-.miniIcon.partly::before {
-  content: "";
-  position: absolute;
-  left: 7px;
-  right: 3px;
-  bottom: 7px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.82);
-}
-
-/* tiny thermometer range bar */
-.thermo {
-  --min: 10;
-  --max: 35;
-  position: relative;
-  height: 10px;
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.thermo .track {
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--stroke);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.thermo .fill {
-  position: absolute;
-  top: 1px;
-  bottom: 1px;
-  left: calc(((var(--low) - var(--min)) / (var(--max) - var(--min))) * 100%);
-  width: calc(((var(--high) - var(--low)) / (var(--max) - var(--min))) * 100%);
-  border-radius: 999px;
-  background: rgba(255, 209, 102, 0.55);
-}
-
-.dayWind {
-  margin: 10px 0 0;
+.futureWind {
+  margin-top: 12px;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
-.note {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
+/* STEP 8: Responsive Design (Media Query) */
 
-/* -------------------------
-   Footer
-------------------------- */
-.footer {
-  margin-top: 14px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  text-align: center;
-}
-
-/* -------------------------
-   Responsive layout
-------------------------- */
 @media (min-width: 720px) {
-  .app {
-    padding: 22px;
-  }
-
-  .current {
+  #currentInfo {
     grid-template-columns: 1.2fr 1fr;
-    align-items: start;
   }
 
-  .days {
+  .futureGrid {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .location {
     font-size: 2rem;
-  }
-}
-
-@media (min-width: 980px) {
-  .stats {
-    grid-template-columns: 1fr 1fr;
   }
 }
