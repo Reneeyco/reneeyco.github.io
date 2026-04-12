@@ -1,0 +1,185 @@
+/* --------------- TP11 styling */
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Playwrite+NZ+Basic:wght@100..400&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Desktop default */
+:root {
+    --cardSize: 180px;
+}
+
+/* Page styling */
+body {
+    background-color: #fbc5db;
+    font-family: 'Mulish', sans-serif;
+    padding: 2rem;
+}
+
+/* Title / text */
+.title {
+    font-family: 'Playwrite NZ Basic', cursive;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+#turnCounter {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ---------------------------------- CARD STRUCTURE */
+
+.card {
+    position: relative;
+    width: var(--cardSize);
+    height: var(--cardSize);
+    perspective: 800px;
+    cursor: pointer;
+}
+
+.cardContent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+/* TP11: cards flip only when JS adds the class */
+.card.flipped .cardContent {
+    transform: rotateY(180deg);
+}
+
+.cardTop,
+.cardBottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    border: 2px solid white;
+    backface-visibility: hidden;
+}
+
+/* Card front */
+.cardTop {
+    background-color: black;
+}
+
+/* Card back */
+.cardBottom {
+    transform: rotateY(180deg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;
+}
+
+/* Matched cards disappear */
+.card.matched {
+    visibility: hidden;
+}
+
+/* ---------------------------------- DOG IMAGES (8 pairs) */
+
+.pair1 .cardBottom {
+    background-image: url("images/1.jpg");
+}
+
+.pair2 .cardBottom {
+    background-image: url("images/2.jpg");
+}
+
+.pair3 .cardBottom {
+    background-image: url("images/3.jpg");
+}
+
+.pair4 .cardBottom {
+    background-image: url("images/4.jpg");
+}
+
+.pair5 .cardBottom {
+    background-image: url("images/5.jpg");
+}
+
+.pair6 .cardBottom {
+    background-image: url("images/6.jpg");
+}
+
+.pair7 .cardBottom {
+    background-image: url("images/7.jpg");
+}
+
+.pair8 .cardBottom {
+    background-image: url("images/8.jpg");
+}
+
+/* ---------------------------------- GAME BOARD LAYOUT */
+
+#gameBoard {
+    display: grid;
+    gap: 1.5rem;
+    justify-content: center;
+    justify-items: center;
+}
+
+/* Win panel */
+#winPanel {
+    display: none;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: white;
+    color: black;
+    border-radius: 16px;
+    border: 2px solid black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: fit-content;
+}
+
+/* Portrait (phones) */
+@media (max-width: 600px) {
+    :root {
+        --cardSize: 130px;
+    }
+
+    body {
+        padding: 1.25rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #turnCounter {
+        margin-bottom: 1.5rem;
+    }
+
+    #gameBoard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Landscape / larger screens */
+@media (min-width: 601px) {
+    #gameBoard {
+        grid-template-columns: repeat(4, auto);
+    }
+}
