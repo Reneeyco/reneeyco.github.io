@@ -1,0 +1,438 @@
+/* TP12 Weather App Styling */
+
+/* STEP 1: Base Reset + Theme Variables */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #3d3939;
+  --bgDark: #2f2a2a;
+  --card: #111111;
+  --cardSoft: #4b4b4b;
+
+  --pink: #ff4da6;
+  --pinkSoft: rgba(255, 77, 166, 0.22);
+
+  --text: #ffffff;
+  --muted: #ece5e5;
+
+  --radius: 20px;
+  --shadow: 0 18px 45px rgba(255, 77, 166, 0.14);
+  --gap: 18px;
+  --max: 1000px;
+}
+
+/* STEP 2: Body + Main Layout */
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at top, #4b4444 0%, #3d3939 45%, #2f2a2a 100%);
+  color: var(--text);
+}
+
+.app {
+  width: min(var(--max), 94vw);
+  margin: 24px auto;
+  padding: 20px;
+}
+
+/* STEP 3: Header */
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap);
+  margin-bottom: 28px;
+}
+
+.label {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.location {
+  margin: 10px 0 0;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.05;
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.updated {
+  margin: 12px 0 0;
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.unitBadge {
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.unitBadge:hover {
+  background: var(--pinkSoft);
+}
+
+#openModal {
+  background: transparent;
+  color: var(--pink);
+  border: 1px solid var(--pink);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#openModal:hover {
+  background: var(--pinkSoft);
+}
+
+/* STEP 4: Cards */
+
+.card {
+  background: linear-gradient(145deg, #080808, #121212);
+  border-radius: 28px;
+  padding: 28px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+/* STEP 5: Current Section */
+
+#currentInfo {
+  display: grid;
+  gap: 24px;
+}
+
+.currentLeft,
+.currentRight {
+  min-width: 0;
+}
+
+#currentTemp {
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.tempBig {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tempNum {
+  font-size: clamp(4rem, 8vw, 5.4rem);
+  font-weight: 900;
+  color: var(--pink);
+  letter-spacing: -2px;
+}
+
+.tempUnit {
+  font-size: 1.2rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.tempSmall {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Condition */
+
+#currentStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.statusIcon {
+  min-width: 82px;
+  min-height: 82px;
+  background: var(--cardSoft);
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+}
+
+#conditionIcon img {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+.statusLabel {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.statusValue {
+  margin: 6px 0 0;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+/* STEP 6: Mini Cards */
+
+.currentRight {
+  display: grid;
+  gap: var(--gap);
+}
+
+.miniCard {
+  background: linear-gradient(145deg, #474747, #525252);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.miniTitle {
+  margin: 0 0 12px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.miniValue {
+  margin: 0;
+}
+
+.bigNum {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.pill {
+  background: var(--pinkSoft);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+
+/* Humidity Bar */
+
+.barWrap {
+  height: 10px;
+  background: #2a2a2a;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.bar {
+  height: 100%;
+  background: var(--pink);
+  box-shadow: 0 0 10px rgba(255, 77, 166, 0.6);
+}
+
+/* STEP 7: Forecast Section */
+
+.sectionHead {
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  color: var(--pink);
+  font-weight: 800;
+}
+
+.sectionSub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.futureGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.futureDay {
+  background: linear-gradient(145deg, #4b4b4b, #555555);
+  border-radius: 18px;
+  padding: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.futureDay:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 24px rgba(255, 77, 166, 0.18);
+}
+
+.futureDay p {
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.dayName {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--pink);
+}
+
+.forecastIcon {
+  margin-bottom: 6px;
+}
+
+.forecastIcon img {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.forecastCondition {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.forecastTemp {
+  font-size: 1.05rem;
+}
+
+.hi {
+  font-weight: 800;
+  color: var(--text);
+}
+
+.lo {
+  color: var(--muted);
+}
+
+.futureWind {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* STEP 8: Modal */
+
+#modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 100;
+}
+
+#locationModal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 101;
+  padding: 20px;
+}
+
+.modalBox {
+  width: min(92vw, 420px);
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border: 1px solid rgba(255, 77, 166, 0.35);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.modalBox h2 {
+  margin: 0 0 16px;
+  color: var(--pink);
+}
+
+.modalBox label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#locationInput {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--pink);
+  background: var(--cardSoft);
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+#locationInput::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modalButtons button {
+  border: 1px solid var(--pink);
+  background: transparent;
+  color: var(--pink);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.modalButtons button:hover {
+  background: var(--pinkSoft);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* STEP 9: Responsive */
+
+@media (min-width: 720px) {
+  #currentInfo {
+    grid-template-columns: 1.15fr 1fr;
+  }
+
+  .futureGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 719px) {
+  .topBar {
+    flex-direction: column;
+  }
+
+  .topRight {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
