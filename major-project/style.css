@@ -28,7 +28,7 @@ h1 {
 }
 
 .intro {
-    max-width: 600px;
+    max-width: 850px;
     margin: 0 auto 30px;
     font-size: 18px;
     line-height: 1.6;
@@ -58,7 +58,7 @@ button:hover {
 }
 
 .message {
-    background-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 14px 20px;
     margin: 14px auto;
     border-radius: 25px;
@@ -86,18 +86,29 @@ button:hover {
     padding: 25px;
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.8s;
+}
+
+#connectionIdeas.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #connectionIdeas h2 {
     margin-top: 0;
+    font-size: 30px;
 }
 
 #connectionIdeas ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 #connectionIdeas li {
     margin: 12px 0;
     font-size: 18px;
+    text-align: center;
 }

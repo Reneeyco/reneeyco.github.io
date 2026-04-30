@@ -31,5 +31,10 @@ showBtn.addEventListener("click", () => {
 
 connectBtn.addEventListener("click", () => {
     connectionIdeas.classList.remove("hidden");
+
+    setTimeout(() => {
+        connectionIdeas.classList.add("show");
+    }, 100);
+
     connectBtn.style.display = "none";
 });
