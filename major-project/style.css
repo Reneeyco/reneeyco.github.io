@@ -1,0 +1,34 @@
+body {
+    background-color: #F6EFE7;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #512526;
+}
+
+#container {
+    margin-top: 100px;
+}
+
+#messages {
+    margin: 20px;
+    min-height: 100px;
+}
+
+.message {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    margin: 10px;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #F9DBD9;
+    border: none;
+    cursor: pointer;
+}
