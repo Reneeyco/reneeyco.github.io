@@ -81,7 +81,7 @@ button:hover {
     display: none;
 }
 
-/* FORCE HIDE FIX */
+/* 🔥 FORCE HIDE FIX */
 #connectionIdeas.hidden {
     display: none !important;
 }
