@@ -3,6 +3,10 @@ const connectBtn = document.getElementById("connectBtn");
 const messageBox = document.getElementById("messages");
 const connectionIdeas = document.getElementById("connectionIdeas");
 
+/* 🔥 FORCE hide on load */
+connectionIdeas.classList.add("hidden");
+connectionIdeas.classList.remove("show");
+
 showBtn.addEventListener("click", () => {
     fetch("messages.json")
         .then(response => response.json())
@@ -22,10 +26,6 @@ showBtn.addEventListener("click", () => {
                     }
                 }, index * 800);
             });
-        })
-        .catch(error => {
-            messageBox.innerHTML = "Something went wrong loading the messages.";
-            console.log(error);
         });
 });
 

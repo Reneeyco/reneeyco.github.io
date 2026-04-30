@@ -76,9 +76,14 @@ button:hover {
     }
 }
 
-/* hide elements at start */
+/* hide */
 .hidden {
     display: none;
+}
+
+/* FORCE HIDE FIX */
+#connectionIdeas.hidden {
+    display: none !important;
 }
 
 /* connection section */
@@ -104,14 +109,12 @@ button:hover {
     font-size: 30px;
 }
 
-/* FIX: remove bullet dots */
 #connectionIdeas ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* FIX: center text */
 #connectionIdeas li {
     margin: 12px 0;
     font-size: 18px;
