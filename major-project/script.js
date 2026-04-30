@@ -3,7 +3,7 @@ const connectBtn = document.getElementById("connectBtn");
 const messageBox = document.getElementById("messages");
 const connectionIdeas = document.getElementById("connectionIdeas");
 
-/* 🔥 FORCE hide on load */
+/* FORCE hide on load */
 connectionIdeas.classList.add("hidden");
 connectionIdeas.classList.remove("show");
 
