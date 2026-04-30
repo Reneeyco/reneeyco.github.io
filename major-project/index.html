@@ -7,11 +7,33 @@
 </head>
 <body>
 
-    <div id="container">
+    <main class="container">
+        <p class="small-text">An interactive digital experience</p>
+
         <h1>You Are Not the Only One</h1>
-        <div id="messages"></div>
+
+        <p class="intro">
+            Sometimes it feels like everyone is connected except you.
+            This space is here to remind you that you are not the only one feeling this way.
+        </p>
+
         <button id="showBtn">Show Messages</button>
-    </div>
+
+        <div id="messages"></div>
+
+        <button id="connectBtn" class="hidden">Find a Small Way to Connect</button>
+
+        <div id="connectionIdeas" class="hidden">
+            <h2>Small Ways to Connect</h2>
+            <ul>
+                <li>Invite someone to get coffee</li>
+                <li>Go to a study group</li>
+                <li>Plan a movie night</li>
+                <li>Take a walk with a friend</li>
+                <li>Join a campus event</li>
+            </ul>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

@@ -1,34 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
+    margin: 0;
     background-color: #F6EFE7;
     font-family: Arial, sans-serif;
-    text-align: center;
     color: #512526;
 }
 
-#container {
-    margin-top: 100px;
+.container {
+    min-height: 100vh;
+    padding: 90px 20px;
+    text-align: center;
 }
 
-#messages {
-    margin: 20px;
-    min-height: 100px;
+.small-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8B5E5E;
 }
 
-.message {
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    margin: 10px;
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
 }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+.intro {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #5C3A3A;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 14px 24px;
     background-color: #F9DBD9;
+    color: #512526;
     border: none;
+    border-radius: 30px;
+    font-size: 16px;
     cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+}
+
+#messages {
+    margin: 30px auto;
+    max-width: 700px;
+}
+
+.message {
+    background-color: rgba(255, 255, 255, 0.55);
+    padding: 14px 20px;
+    margin: 14px auto;
+    border-radius: 25px;
+    font-size: 20px;
+    color: #512526;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.2s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+#connectionIdeas {
+    max-width: 500px;
+    margin: 35px auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+}
+
+#connectionIdeas h2 {
+    margin-top: 0;
+}
+
+#connectionIdeas ul {
+    list-style: none;
+    padding: 0;
+}
+
+#connectionIdeas li {
+    margin: 12px 0;
+    font-size: 18px;
 }
