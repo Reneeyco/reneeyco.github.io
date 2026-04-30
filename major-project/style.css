@@ -76,16 +76,19 @@ button:hover {
     }
 }
 
+/* hide elements at start */
 .hidden {
     display: none;
 }
 
+/* connection section */
 #connectionIdeas {
     max-width: 500px;
     margin: 35px auto;
     padding: 25px;
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 25px;
+
     opacity: 0;
     transform: translateY(20px);
     transition: 0.8s;
@@ -101,12 +104,14 @@ button:hover {
     font-size: 30px;
 }
 
+/* FIX: remove bullet dots */
 #connectionIdeas ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+/* FIX: center text */
 #connectionIdeas li {
     margin: 12px 0;
     font-size: 18px;
