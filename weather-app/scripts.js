@@ -6,7 +6,7 @@ let currentWeatherData = null;
 let currentUnit = "C";
 
 /* --------------------------
-   HELPER: FORMAT DATE
+   FORMAT HELPERS
 -------------------------- */
 
 function formatDateWithDay(dateString) {
@@ -49,36 +49,31 @@ function getSavedLocations() {
 function saveLocation(locationName) {
   let saved = getSavedLocations();
 
-  saved = saved.filter(function (location) {
-    return location.toLowerCase() !== locationName.toLowerCase();
-  });
-
+  saved = saved.filter(loc => loc.toLowerCase() !== locationName.toLowerCase());
   saved.unshift(locationName);
 
-  if (saved.length > 5) {
-    saved = saved.slice(0, 5);
-  }
+  if (saved.length > 5) saved = saved.slice(0, 5);
 
   localStorage.setItem("savedLocations", JSON.stringify(saved));
   updateSavedLocationsMenu();
 }
 
 function updateSavedLocationsMenu() {
-  const savedLocations = document.getElementById("savedLocations");
+  const select = document.getElementById("savedLocations");
   const saved = getSavedLocations();
 
-  savedLocations.innerHTML = "";
+  select.innerHTML = "";
 
   if (saved.length === 0) {
-    savedLocations.innerHTML = `<option value="">No saved locations yet</option>`;
+    select.innerHTML = `<option value="">No saved locations</option>`;
     return;
   }
 
-  saved.forEach(function (location) {
+  saved.forEach(loc => {
     const option = document.createElement("option");
-    option.value = location;
-    option.textContent = location;
-    savedLocations.appendChild(option);
+    option.value = loc;
+    option.textContent = loc;
+    select.appendChild(option);
   });
 }
 
@@ -106,12 +101,7 @@ function updateTemperatureDisplay() {
 }
 
 function toggleUnit() {
-  if (currentUnit === "C") {
-    currentUnit = "F";
-  } else {
-    currentUnit = "C";
-  }
-
+  currentUnit = currentUnit === "C" ? "F" : "C";
   updateTemperatureDisplay();
 }
 
@@ -124,13 +114,12 @@ function loadByGPS() {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(
-      function (position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
+      pos => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
         getWeather(`${lat},${lon}`, false);
       },
-      function () {
+      () => {
         getWeather("Pullman", false);
       }
     );
@@ -144,12 +133,13 @@ function loadByGPS() {
 -------------------------- */
 
 async function getWeather(location = "Pullman", shouldSave = true) {
-  const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(location)}&days=4`;
+
+  const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(location)}&days=3`;
 
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "PASTE_YOUR_KEY_HERE",
+      "x-rapidapi-key": "40a8e974bamsh7f0973adf5c7f3cp1b290ajsn4a8a001f3b4e",
       "x-rapidapi-host": "weatherapi-com.p.rapidapi.com"
     }
   };
@@ -159,8 +149,7 @@ async function getWeather(location = "Pullman", shouldSave = true) {
     const data = await res.json();
 
     if (data.error) {
-      document.getElementById("lastUpdated").textContent =
-        "Location not found. Please try again.";
+      document.getElementById("lastUpdated").textContent = "Location not found";
       return;
     }
 
@@ -180,7 +169,7 @@ async function getWeather(location = "Pullman", shouldSave = true) {
       data.current.condition.text;
 
     document.getElementById("conditionIcon").innerHTML =
-      `<img src="https:${data.current.condition.icon}" alt="${data.current.condition.text}">`;
+      `<img src="https:${data.current.condition.icon}">`;
 
     document.getElementById("humidityValue").textContent =
       data.current.humidity;
@@ -198,46 +187,44 @@ async function getWeather(location = "Pullman", shouldSave = true) {
 
   } catch (err) {
     console.error(err);
-
-    document.getElementById("lastUpdated").textContent =
-      "Error loading weather.";
+    document.getElementById("lastUpdated").textContent = "Error loading weather";
   }
 }
 
 /* --------------------------
-   NEXT 3 DAYS FORECAST
+   3-DAY FORECAST
 -------------------------- */
 
 function updateFutureForecast(data) {
-  const futureDays = data.forecast.forecastday.slice(1, 4);
+  const days = data.forecast.forecastday;
 
-  futureDays.forEach(function (day, index) {
-    const number = index + 1;
+  days.forEach((day, i) => {
+    const num = i + 1;
 
-    document.getElementById(`day${number}Name`).textContent =
+    document.getElementById(`day${num}Name`).textContent =
       formatDateWithDay(day.date);
 
-    document.getElementById(`day${number}Icon`).innerHTML =
-      `<img src="https:${day.day.condition.icon}" alt="${day.day.condition.text}">`;
+    document.getElementById(`day${num}Icon`).innerHTML =
+      `<img src="https:${day.day.condition.icon}">`;
 
-    document.getElementById(`day${number}Condition`).textContent =
+    document.getElementById(`day${num}Condition`).textContent =
       day.day.condition.text;
 
     if (currentUnit === "C") {
-      document.getElementById(`day${number}Hi`).textContent =
+      document.getElementById(`day${num}Hi`).textContent =
         `${day.day.maxtemp_c}°C`;
 
-      document.getElementById(`day${number}Lo`).textContent =
+      document.getElementById(`day${num}Lo`).textContent =
         `${day.day.mintemp_c}°C`;
     } else {
-      document.getElementById(`day${number}Hi`).textContent =
+      document.getElementById(`day${num}Hi`).textContent =
         `${day.day.maxtemp_f}°F`;
 
-      document.getElementById(`day${number}Lo`).textContent =
+      document.getElementById(`day${num}Lo`).textContent =
         `${day.day.mintemp_f}°F`;
     }
 
-    document.getElementById(`day${number}Wind`).textContent =
+    document.getElementById(`day${num}Wind`).textContent =
       `Wind: ${day.day.maxwind_kph} kph`;
   });
 }
@@ -247,39 +234,36 @@ function updateFutureForecast(data) {
 -------------------------- */
 
 function updateHourlyForecast(data) {
-  const hourlyContainer = document.getElementById("hourlyContainer");
-  hourlyContainer.innerHTML = "";
+  const container = document.getElementById("hourlyContainer");
+  container.innerHTML = "";
 
-  const threeDays = data.forecast.forecastday.slice(1, 4);
+  const days = data.forecast.forecastday;
 
-  threeDays.forEach(function (day) {
-    day.hour.forEach(function (hour) {
-      const hourCard = document.createElement("div");
-      hourCard.classList.add("hourCard");
+  days.forEach(day => {
+    day.hour.forEach(hour => {
 
-      let tempText;
+      const card = document.createElement("div");
+      card.className = "hourCard";
 
-      if (currentUnit === "C") {
-        tempText = `${hour.temp_c}°C`;
-      } else {
-        tempText = `${hour.temp_f}°F`;
-      }
+      const temp =
+        currentUnit === "C"
+          ? `${hour.temp_c}°C`
+          : `${hour.temp_f}°F`;
 
-      hourCard.innerHTML = `
-        <p class="hourDate">${formatHourDate(hour.time)}</p>
-        <p class="hourTime">${formatHourTime(hour.time)}</p>
-        <img src="https:${hour.condition.icon}" alt="${hour.condition.text}">
-        <p class="hourTemp">${tempText}</p>
-        <p class="hourCondition">${hour.condition.text}</p>
+      card.innerHTML = `
+        <p>${formatHourDate(hour.time)}</p>
+        <p>${formatHourTime(hour.time)}</p>
+        <img src="https:${hour.condition.icon}">
+        <p>${temp}</p>
       `;
 
-      hourlyContainer.appendChild(hourCard);
+      container.appendChild(card);
     });
   });
 }
 
 /* --------------------------
-   MODAL ELEMENTS
+   MODAL + EVENTS
 -------------------------- */
 
 const openModalBtn = document.getElementById("openModal");
@@ -288,14 +272,11 @@ const modalOverlay = document.getElementById("modalOverlay");
 const locationModal = document.getElementById("locationModal");
 const locationForm = document.getElementById("locationForm");
 const locationInput = document.getElementById("locationInput");
+
 const unitToggle = document.getElementById("unitToggle");
 const useSaved = document.getElementById("useSaved");
 const resetLocation = document.getElementById("resetLocation");
 const savedLocations = document.getElementById("savedLocations");
-
-/* --------------------------
-   MODAL FUNCTIONS
--------------------------- */
 
 function showModal() {
   modalOverlay.classList.remove("hidden");
@@ -307,18 +288,14 @@ function hideModal() {
   locationModal.classList.add("hidden");
 }
 
-/* --------------------------
-   EVENTS
--------------------------- */
-
 openModalBtn.addEventListener("click", showModal);
 closeModalBtn.addEventListener("click", hideModal);
 modalOverlay.addEventListener("click", hideModal);
 
 unitToggle.addEventListener("click", toggleUnit);
 
-locationForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+locationForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
   const newLocation = locationInput.value.trim();
 
@@ -329,16 +306,14 @@ locationForm.addEventListener("submit", function (event) {
   }
 });
 
-useSaved.addEventListener("click", function () {
-  const selectedLocation = savedLocations.value;
-
-  if (selectedLocation !== "") {
-    getWeather(selectedLocation, true);
+useSaved.addEventListener("click", () => {
+  if (savedLocations.value) {
+    getWeather(savedLocations.value, true);
     hideModal();
   }
 });
 
-resetLocation.addEventListener("click", function () {
+resetLocation.addEventListener("click", () => {
   loadByGPS();
   hideModal();
 });
