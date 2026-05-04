@@ -11,17 +11,12 @@ let currentUnit = "C";
 
 function formatDateWithDay(dateString) {
   const date = new Date(dateString + "T00:00:00");
-
-  const dayName = date.toLocaleDateString("en-US", {
-    weekday: "short"
-  });
-
+  const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
   return `${dayName}, ${dateString}`;
 }
 
 function formatHourTime(timeString) {
   const date = new Date(timeString.replace(" ", "T"));
-
   return date.toLocaleTimeString("en-US", {
     hour: "numeric",
     hour12: true
@@ -30,7 +25,6 @@ function formatHourTime(timeString) {
 
 function formatHourDate(timeString) {
   const date = new Date(timeString.replace(" ", "T"));
-
   return date.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -106,7 +100,7 @@ function toggleUnit() {
 }
 
 /* --------------------------
-   GPS LOCATION
+   GPS LOCATION (BUTTON USE)
 -------------------------- */
 
 function loadByGPS() {
@@ -319,8 +313,8 @@ resetLocation.addEventListener("click", () => {
 });
 
 /* --------------------------
-   INITIAL LOAD
+   INITIAL LOAD (FIXED)
 -------------------------- */
 
 updateSavedLocationsMenu();
-loadByGPS();
+getWeather("Pullman", false);
