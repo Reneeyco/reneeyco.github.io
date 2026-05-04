@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather App 2.0</title>
+  <title>XC Weather App</title>
 
   <link rel="stylesheet" href="style.css" />
   <script src="scripts.js" defer></script>
@@ -13,7 +13,6 @@
 <body>
   <main class="app">
 
-    <!-- LOCATION HEADER -->
     <header class="topBar">
       <div>
         <p class="label">Location</p>
@@ -23,22 +22,20 @@
 
       <div class="topRight">
         <button id="openModal">Change Location</button>
-        <div class="unitBadge">°C / °F</div>
+        <button id="unitToggle" class="unitBadge">°C / °F</button>
       </div>
     </header>
 
-    <!-- CURRENT CONDITIONS -->
     <section class="card" id="currentInfo">
-
       <div class="currentLeft">
         <p class="label">Now</p>
 
         <div id="currentTemp">
           <div class="tempBig">
-            <span class="tempNum" id="tempC">--</span>
-            <span class="tempUnit">°C</span>
+            <span class="tempNum" id="mainTemp">--</span>
+            <span class="tempUnit" id="mainUnit">°C</span>
           </div>
-          <div class="tempSmall" id="tempF">--</div>
+          <div class="tempSmall" id="otherTemp">--</div>
         </div>
 
         <div id="currentStatus">
@@ -51,99 +48,98 @@
       </div>
 
       <div class="currentRight">
-
-        <!-- HUMIDITY -->
-        <div class="miniCard" id="currentHumidity">
+        <div class="miniCard">
           <p class="miniTitle">Humidity</p>
           <p class="miniValue">
             <span class="bigNum" id="humidityValue">--</span>%
           </p>
-
           <div class="barWrap">
             <div class="bar" id="humidityBar" style="width: 0%"></div>
           </div>
         </div>
 
-        <!-- WIND -->
-        <div class="miniCard" id="currentWind">
+        <div class="miniCard">
           <p class="miniTitle">Wind</p>
           <p class="miniValue">
             <span class="bigNum" id="windSpeed">--</span> kph
             <span class="pill" id="windDir">--</span>
           </p>
         </div>
-
       </div>
     </section>
 
-    <!-- NEXT 3 DAYS FORECAST -->
     <section class="card" id="futureInfo">
-
       <div class="sectionHead">
         <h2 class="sectionTitle">Next 3 Days</h2>
         <p class="sectionSub">Temp Range • Condition • Wind</p>
       </div>
 
       <div class="futureGrid">
-
-        <!-- DAY 1 -->
         <div class="futureDay">
           <p class="dayName" id="day1Name">--</p>
           <div class="forecastIcon" id="day1Icon">☀️</div>
           <p class="forecastCondition" id="day1Condition">--</p>
           <p class="forecastTemp">
-            <span class="hi" id="day1HiC">--</span> /
-            <span class="lo" id="day1LoC">--</span>
+            <span class="hi" id="day1Hi">--</span> /
+            <span class="lo" id="day1Lo">--</span>
           </p>
           <p class="futureWind" id="day1Wind">--</p>
         </div>
 
-        <!-- DAY 2 -->
         <div class="futureDay">
           <p class="dayName" id="day2Name">--</p>
           <div class="forecastIcon" id="day2Icon">☀️</div>
           <p class="forecastCondition" id="day2Condition">--</p>
           <p class="forecastTemp">
-            <span class="hi" id="day2HiC">--</span> /
-            <span class="lo" id="day2LoC">--</span>
+            <span class="hi" id="day2Hi">--</span> /
+            <span class="lo" id="day2Lo">--</span>
           </p>
           <p class="futureWind" id="day2Wind">--</p>
         </div>
 
-        <!-- DAY 3 -->
         <div class="futureDay">
           <p class="dayName" id="day3Name">--</p>
           <div class="forecastIcon" id="day3Icon">☀️</div>
           <p class="forecastCondition" id="day3Condition">--</p>
           <p class="forecastTemp">
-            <span class="hi" id="day3HiC">--</span> /
-            <span class="lo" id="day3LoC">--</span>
+            <span class="hi" id="day3Hi">--</span> /
+            <span class="lo" id="day3Lo">--</span>
           </p>
           <p class="futureWind" id="day3Wind">--</p>
         </div>
-
       </div>
+    </section>
+
+    <section class="card" id="hourlySection">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">Hourly Forecast</h2>
+        <p class="sectionSub">One forecast per hour for 3 days</p>
+      </div>
+
+      <div id="hourlyContainer" class="hourlyGrid"></div>
     </section>
 
   </main>
 
-  <!-- MODAL OVERLAY -->
   <div id="modalOverlay" class="hidden"></div>
 
-  <!-- LOCATION MODAL -->
   <div id="locationModal" class="hidden">
     <div class="modalBox">
       <h2>Search Location</h2>
 
       <form id="locationForm">
         <label for="locationInput">Enter city or town</label>
-        <input
-          type="text"
-          id="locationInput"
-          name="locationInput"
-          placeholder="Example: Seattle"
-          required
-        />
+        <input type="text" id="locationInput" name="locationInput" placeholder="Example: Seattle" required />
+
+        <div class="savedBox">
+          <label for="savedLocations">Recent Locations</label>
+          <select id="savedLocations">
+            <option value="">No saved locations yet</option>
+          </select>
+
+          <button type="button" id="useSaved">Use Selected</button>
+          <button type="button" id="resetLocation">Use My Location</button>
+        </div>
 
         <div class="modalButtons">
           <button type="submit">Search</button>

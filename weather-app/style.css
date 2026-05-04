@@ -1,6 +1,4 @@
-/* TP12 Weather App Styling */
-
-/* STEP 1: Base Reset + Theme Variables */
+/* XC Weather App Styling */
 
 * {
   box-sizing: border-box;
@@ -24,8 +22,6 @@
   --max: 1000px;
 }
 
-/* STEP 2: Body + Main Layout */
-
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -38,8 +34,6 @@ body {
   margin: 24px auto;
   padding: 20px;
 }
-
-/* STEP 3: Header */
 
 .topBar {
   display: flex;
@@ -78,20 +72,8 @@ body {
   flex-wrap: wrap;
 }
 
+#openModal,
 .unitBadge {
-  border: 1px solid var(--pink);
-  color: var(--pink);
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-weight: 700;
-  transition: 0.2s ease;
-}
-
-.unitBadge:hover {
-  background: var(--pinkSoft);
-}
-
-#openModal {
   background: transparent;
   color: var(--pink);
   border: 1px solid var(--pink);
@@ -102,11 +84,10 @@ body {
   transition: 0.2s ease;
 }
 
-#openModal:hover {
+#openModal:hover,
+.unitBadge:hover {
   background: var(--pinkSoft);
 }
-
-/* STEP 4: Cards */
 
 .card {
   background: linear-gradient(145deg, #080808, #121212);
@@ -115,8 +96,6 @@ body {
   margin-bottom: 22px;
   box-shadow: var(--shadow);
 }
-
-/* STEP 5: Current Section */
 
 #currentInfo {
   display: grid;
@@ -158,8 +137,6 @@ body {
   margin-top: 8px;
 }
 
-/* Condition */
-
 #currentStatus {
   display: flex;
   align-items: center;
@@ -177,7 +154,8 @@ body {
   padding: 10px;
 }
 
-#conditionIcon img {
+.statusIcon img,
+.forecastIcon img {
   width: 52px;
   height: 52px;
   display: block;
@@ -194,8 +172,6 @@ body {
   font-weight: 800;
   font-size: 1.05rem;
 }
-
-/* STEP 6: Mini Cards */
 
 .currentRight {
   display: grid;
@@ -235,8 +211,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Humidity Bar */
-
 .barWrap {
   height: 10px;
   background: #2a2a2a;
@@ -250,8 +224,6 @@ body {
   background: var(--pink);
   box-shadow: 0 0 10px rgba(255, 77, 166, 0.6);
 }
-
-/* STEP 7: Forecast Section */
 
 .sectionHead {
   margin-bottom: 20px;
@@ -300,16 +272,6 @@ body {
   color: var(--pink);
 }
 
-.forecastIcon {
-  margin-bottom: 6px;
-}
-
-.forecastIcon img {
-  width: 42px;
-  height: 42px;
-  display: block;
-}
-
 .forecastCondition {
   font-size: 1rem;
   font-weight: 600;
@@ -325,16 +287,55 @@ body {
   color: var(--text);
 }
 
-.lo {
-  color: var(--muted);
-}
-
+.lo,
 .futureWind {
   color: var(--muted);
-  font-size: 0.95rem;
 }
 
-/* STEP 8: Modal */
+.hourlyGrid {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 8px 4px 12px;
+}
+
+.hourCard {
+  min-width: 105px;
+  background: linear-gradient(145deg, #4b4b4b, #555555);
+  border-radius: 16px;
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.hourCard p {
+  margin: 6px 0;
+}
+
+.hourTime {
+  font-weight: 800;
+  color: var(--pink);
+  font-size: 0.9rem;
+}
+
+.hourDate {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.hourCard img {
+  width: 34px;
+  height: 34px;
+}
+
+.hourTemp {
+  font-weight: 900;
+}
+
+.hourCondition {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 
 #modalOverlay {
   position: fixed;
@@ -353,7 +354,7 @@ body {
 }
 
 .modalBox {
-  width: min(92vw, 420px);
+  width: min(92vw, 460px);
   background: linear-gradient(145deg, #1a1a1a, #242424);
   border: 1px solid rgba(255, 77, 166, 0.35);
   border-radius: 20px;
@@ -373,7 +374,8 @@ body {
   font-size: 0.95rem;
 }
 
-#locationInput {
+#locationInput,
+#savedLocations {
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
@@ -381,12 +383,19 @@ body {
   background: var(--cardSoft);
   color: var(--text);
   font-size: 1rem;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 #locationInput::placeholder {
   color: var(--muted);
   opacity: 0.8;
+}
+
+.savedBox {
+  margin: 8px 0 18px;
+  padding: 14px;
+  border: 1px solid rgba(255, 77, 166, 0.25);
+  border-radius: 16px;
 }
 
 .modalButtons {
@@ -395,7 +404,8 @@ body {
   flex-wrap: wrap;
 }
 
-.modalButtons button {
+.modalButtons button,
+.savedBox button {
   border: 1px solid var(--pink);
   background: transparent;
   color: var(--pink);
@@ -404,17 +414,17 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s ease;
+  margin: 4px 4px 4px 0;
 }
 
-.modalButtons button:hover {
+.modalButtons button:hover,
+.savedBox button:hover {
   background: var(--pinkSoft);
 }
 
 .hidden {
   display: none !important;
 }
-
-/* STEP 9: Responsive */
 
 @media (min-width: 720px) {
   #currentInfo {
