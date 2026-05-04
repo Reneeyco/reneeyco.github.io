@@ -13,88 +13,141 @@
 <body>
   <main class="app">
 
-    <!-- HEADER -->
     <header class="topBar">
       <div>
         <p class="label">Location</p>
-        <h1 id="locationName">Loading...</h1>
-        <p id="lastUpdated">--</p>
+        <h1 class="location" id="locationName">Loading...</h1>
+        <p class="updated" id="lastUpdated">--</p>
       </div>
 
       <div class="topRight">
         <button id="openModal">Change Location</button>
-        <button id="unitToggle">°C / °F</button>
+        <button id="unitToggle" class="unitBadge">°C / °F</button>
       </div>
     </header>
 
-    <!-- CURRENT -->
-    <section class="card">
-      <h2>Now</h2>
-      <h1 id="mainTemp">--</h1>
-      <p id="otherTemp">--</p>
+    <section class="card" id="currentInfo">
+      <div class="currentLeft">
+        <p class="label">Now</p>
 
-      <div id="conditionIcon"></div>
-      <p id="conditionText"></p>
-
-      <p>Humidity: <span id="humidityValue"></span>%</p>
-      <p>Wind: <span id="windSpeed"></span> kph (<span id="windDir"></span>)</p>
-    </section>
-
-    <!-- 3 DAY -->
-    <section class="card">
-      <h2>3-Day Forecast</h2>
-
-      <div class="futureGrid">
-        <div>
-          <p id="day1Name"></p>
-          <div id="day1Icon"></div>
-          <p id="day1Condition"></p>
-          <p><span id="day1Hi"></span> / <span id="day1Lo"></span></p>
-          <p id="day1Wind"></p>
+        <div id="currentTemp">
+          <div class="tempBig">
+            <span class="tempNum" id="mainTemp">--</span>
+            <span class="tempUnit" id="mainUnit">°C</span>
+          </div>
+          <div class="tempSmall" id="otherTemp">--</div>
         </div>
 
-        <div>
-          <p id="day2Name"></p>
-          <div id="day2Icon"></div>
-          <p id="day2Condition"></p>
-          <p><span id="day2Hi"></span> / <span id="day2Lo"></span></p>
-          <p id="day2Wind"></p>
+        <div id="currentStatus">
+          <div class="statusIcon" id="conditionIcon">☁️</div>
+          <div>
+            <p class="statusLabel">Condition</p>
+            <p class="statusValue" id="conditionText">--</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="currentRight">
+        <div class="miniCard">
+          <p class="miniTitle">Humidity</p>
+          <p class="miniValue">
+            <span class="bigNum" id="humidityValue">--</span>%
+          </p>
+          <div class="barWrap">
+            <div class="bar" id="humidityBar" style="width: 0%"></div>
+          </div>
         </div>
 
-        <div>
-          <p id="day3Name"></p>
-          <div id="day3Icon"></div>
-          <p id="day3Condition"></p>
-          <p><span id="day3Hi"></span> / <span id="day3Lo"></span></p>
-          <p id="day3Wind"></p>
+        <div class="miniCard">
+          <p class="miniTitle">Wind</p>
+          <p class="miniValue">
+            <span class="bigNum" id="windSpeed">--</span> kph
+            <span class="pill" id="windDir">--</span>
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- HOURLY -->
-    <section class="card">
-      <h2>Hourly Forecast</h2>
+    <section class="card" id="futureInfo">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">Next 3 Days</h2>
+        <p class="sectionSub">Temp Range • Condition • Wind</p>
+      </div>
+
+      <div class="futureGrid">
+        <div class="futureDay">
+          <p class="dayName" id="day1Name">--</p>
+          <div class="forecastIcon" id="day1Icon">☀️</div>
+          <p class="forecastCondition" id="day1Condition">--</p>
+          <p class="forecastTemp">
+            <span class="hi" id="day1Hi">--</span> /
+            <span class="lo" id="day1Lo">--</span>
+          </p>
+          <p class="futureWind" id="day1Wind">--</p>
+        </div>
+
+        <div class="futureDay">
+          <p class="dayName" id="day2Name">--</p>
+          <div class="forecastIcon" id="day2Icon">☀️</div>
+          <p class="forecastCondition" id="day2Condition">--</p>
+          <p class="forecastTemp">
+            <span class="hi" id="day2Hi">--</span> /
+            <span class="lo" id="day2Lo">--</span>
+          </p>
+          <p class="futureWind" id="day2Wind">--</p>
+        </div>
+
+        <div class="futureDay">
+          <p class="dayName" id="day3Name">--</p>
+          <div class="forecastIcon" id="day3Icon">☀️</div>
+          <p class="forecastCondition" id="day3Condition">--</p>
+          <p class="forecastTemp">
+            <span class="hi" id="day3Hi">--</span> /
+            <span class="lo" id="day3Lo">--</span>
+          </p>
+          <p class="futureWind" id="day3Wind">--</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="hourlySection">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">Hourly Forecast</h2>
+        <p class="sectionSub">One forecast per hour for 3 days</p>
+      </div>
+
       <div id="hourlyContainer" class="hourlyGrid"></div>
     </section>
 
   </main>
 
-  <!-- MODAL -->
   <div id="modalOverlay" class="hidden"></div>
 
   <div id="locationModal" class="hidden">
-    <form id="locationForm">
-      <input id="locationInput" placeholder="Enter city" required>
+    <div class="modalBox">
+      <h2>Search Location</h2>
 
-      <select id="savedLocations"></select>
-      <button type="button" id="useSaved">Use Selected</button>
-      <button type="button" id="resetLocation">Use My Location</button>
+      <form id="locationForm">
+        <label for="locationInput">Enter city or town</label>
+        <input type="text" id="locationInput" name="locationInput" placeholder="Example: Seattle" required />
 
-      <button type="submit">Search</button>
-      <button type="button" id="closeModal">Cancel</button>
-    </form>
+        <div class="savedBox">
+          <label for="savedLocations">Recent Locations</label>
+          <select id="savedLocations">
+            <option value="">No saved locations yet</option>
+          </select>
+
+          <button type="button" id="useSaved">Use Selected</button>
+          <button type="button" id="resetLocation">Use My Location</button>
+        </div>
+
+        <div class="modalButtons">
+          <button type="submit">Search</button>
+          <button type="button" id="closeModal">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
-
 </body>
 
 </html>
