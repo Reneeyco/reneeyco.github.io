@@ -100,7 +100,7 @@ function toggleUnit() {
 }
 
 /* --------------------------
-   GPS LOCATION (BUTTON USE)
+   GPS LOCATION
 -------------------------- */
 
 function loadByGPS() {
@@ -186,7 +186,7 @@ async function getWeather(location = "Pullman", shouldSave = true) {
 }
 
 /* --------------------------
-   3-DAY FORECAST
+   3-DAY FORECAST (NO SKIP)
 -------------------------- */
 
 function updateFutureForecast(data) {
@@ -207,13 +207,11 @@ function updateFutureForecast(data) {
     if (currentUnit === "C") {
       document.getElementById(`day${num}Hi`).textContent =
         `${day.day.maxtemp_c}°C`;
-
       document.getElementById(`day${num}Lo`).textContent =
         `${day.day.mintemp_c}°C`;
     } else {
       document.getElementById(`day${num}Hi`).textContent =
         `${day.day.maxtemp_f}°F`;
-
       document.getElementById(`day${num}Lo`).textContent =
         `${day.day.mintemp_f}°F`;
     }
@@ -313,7 +311,7 @@ resetLocation.addEventListener("click", () => {
 });
 
 /* --------------------------
-   INITIAL LOAD (FIXED)
+   INITIAL LOAD
 -------------------------- */
 
 updateSavedLocationsMenu();
