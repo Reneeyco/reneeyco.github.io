@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You Are Not the Only One</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,27 +16,26 @@
         <h1>You Are Not the Only One</h1>
 
         <p class="intro">
-            Sometimes it feels like everyone is connected except you.
-            This space is here to remind you that you are not the only one feeling this way.
+            A soft digital space about loneliness, connection, and realizing that many people feel the same way.
         </p>
 
         <button id="showBtn">Show Messages</button>
 
-        <div id="messages"></div>
+        <section id="messages"></section>
 
         <button id="connectBtn" class="hidden">Find a Small Way to Connect</button>
 
-        <!-- hidden at start -->
-        <div id="connectionIdeas" class="hidden">
+        <section id="connectionIdeas" class="hidden">
             <h2>Small Ways to Connect</h2>
-            <ul>
-                <li>Invite someone to get coffee</li>
-                <li>Go to a study group</li>
-                <li>Plan a movie night</li>
-                <li>Take a walk with a friend</li>
-                <li>Join a campus event</li>
-            </ul>
-        </div>
+
+            <div class="idea-card">Invite someone to get coffee</div>
+            <div class="idea-card">Go to a study group</div>
+            <div class="idea-card">Plan a movie night</div>
+            <div class="idea-card">Take a walk with a friend</div>
+            <div class="idea-card">Join a campus event</div>
+
+            <p class="ending">You are not alone.</p>
+        </section>
     </main>
 
     <script src="script.js"></script>

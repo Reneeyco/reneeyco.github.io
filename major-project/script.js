@@ -3,7 +3,7 @@ const connectBtn = document.getElementById("connectBtn");
 const messageBox = document.getElementById("messages");
 const connectionIdeas = document.getElementById("connectionIdeas");
 
-/* FORCE hide on load */
+// Keep the connection section hidden when the page first loads
 connectionIdeas.classList.add("hidden");
 connectionIdeas.classList.remove("show");
 
@@ -14,18 +14,23 @@ showBtn.addEventListener("click", () => {
             messageBox.innerHTML = "";
             showBtn.style.display = "none";
 
-            data.messages.forEach((msg, index) => {
+            data.messages.forEach((item, index) => {
                 setTimeout(() => {
-                    const p = document.createElement("p");
-                    p.textContent = msg;
-                    p.classList.add("message");
-                    messageBox.appendChild(p);
+                    const message = document.createElement("p");
+                    message.textContent = item.text;
+                    message.classList.add("message");
+                    messageBox.appendChild(message);
 
+                    // Show second button after all messages appear
                     if (index === data.messages.length - 1) {
                         connectBtn.classList.remove("hidden");
                     }
-                }, index * 800);
+                }, index * 700);
             });
+        })
+        .catch(error => {
+            messageBox.innerHTML = "<p>Something went wrong loading the messages.</p>";
+            console.log("JSON loading error:", error);
         });
 });
 
